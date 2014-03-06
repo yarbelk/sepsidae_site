@@ -21,9 +21,9 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3' if 'test' in sys.argv else 'django.db.backends.mysql',
-        'NAME': 'sepsidae_site_dev',
-        'USER': 'root',
-        'PASSWORD': '',
+        'NAME': 'sepsidae_local',
+        'USER': 'sepsidae_user',
+        'PASSWORD': 'hello',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
@@ -124,13 +124,15 @@ DJANGO_APPS = (
 THIRD_PARTY_APPS = (
     'south',
     'storages',
-    'raven.contrib.django.raven_compat',
     'bower',
     'gunicorn',
     'compressor',
+    'rest_framework',
 )
 
 LOCAL_APPS = (
+    'sepsid',
+    'contribs',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -140,12 +142,20 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_MODEL_SERIALIZER_CLASS':
+        'rest_framework.serializers.HyperlinkedModelSerializer',
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+    ]
+}
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'root': {
         'level': 'WARNING',
-        'handlers': ['sentry'],
+        'handlers': [],
     },
     'formatters': {
         'verbose': {
@@ -168,10 +178,6 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
             'formatter': 'verbose'
-        },
-        'sentry': {
-            'level': 'ERROR',
-            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler'
         }
     },
     'loggers': {
@@ -180,24 +186,8 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
-        'raven': {
-            'level': 'DEBUG',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-        'sentry.errors': {
-            'level': 'DEBUG',
-            'handlers': ['console'],
-            'propagate': False,
-        }
     }
 }
-
-RAVEN_CONFIG = {
-    'site': 'development',
-    'dsn': 'create new at https://sentry.mediapop.co/ or leave blank',
-}
-
 
 WSGI_APPLICATION = 'wsgi.application'
 
