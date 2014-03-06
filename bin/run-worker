@@ -1,0 +1,5 @@
+#!/bin/bash
+source "$(dirname "$0")/_manage.sh"
+
+ensure_updated
+exec $MANAGE_DIR/manage.py celery worker -B -E

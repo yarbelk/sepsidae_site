@@ -1,0 +1,5 @@
+[program:sepsidae_site-worker]
+command=/home/deploy/sepsidae_site/bin/run-worker production
+directory=/home/deploy/sepsidae_site/src/sepsidae_site
+environment=PATH="/home/deploy/.virtualenvs/sepsidae_site/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin",HOME=/home/deploy
+user=deploy

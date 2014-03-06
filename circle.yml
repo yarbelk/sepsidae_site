@@ -1,0 +1,22 @@
+dependencies:
+  cache_directories:
+    - "~/.cache/bower"
+  pre:
+    - cp conf.d/.ssh/* ~/.ssh
+    - chmod 600 ~/.ssh/id_rsa*
+  override:
+    - npm install -g bower@1.1.2 less@1.4.2
+    - pip install -r requirements.txt --exists-action=w
+    - src/sepsidae_site/manage.py bower_install --settings=conf.settings.test
+test:
+  override:
+    - make test
+deployment:
+  staging:
+    branch: develop
+    commands:
+      - fab up:develop migrate:develop -Rstaging
+  release:
+    branch: master
+    commands:
+      - fab up:master migrate:master -Rproduction

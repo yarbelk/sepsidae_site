@@ -1,0 +1,10 @@
+#!/bin/bash
+source "$(dirname "$0")/_manage.sh"
+
+DOCUMENTS="$MANAGE_DIR/media/documents"
+if [[ -d "$DOCUMENTS" ]] ; then
+    rm -rf $DOCUMENTS
+fi
+
+DJANGO_SETTINGS_MODULE="conf.settings.test"
+manage test
