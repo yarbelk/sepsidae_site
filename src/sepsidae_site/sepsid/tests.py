@@ -1,13 +1,16 @@
 from __future__ import unicode_literals
 
 from rest_framework.test import APITestCase
+from rest_framework.parsers import JSONParser
 
-from contribs.factories import UserFactory, ContributorFactory
+from contribs.factories import UserFactory, ContributorFactory, InstitutionFactory
 
 from .factories import SpeciesFactory, GenusFactory
 
 from datetime import date
 from django.core.exceptions import ValidationError
+
+json_parser = JSONParser()
 
 ### Model tests
 
@@ -115,3 +118,4 @@ class GenusTestCases(APITestCase):
         self.assertEquals(children.count(), 2)
         self.assertIn(child_one, children)
         self.assertIn(child_two, children)
+

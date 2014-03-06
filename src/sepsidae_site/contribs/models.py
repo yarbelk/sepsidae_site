@@ -4,7 +4,7 @@ from django.conf import settings
 # Create your models here.
 
 class Contributor(models.Model):
-    institution = models.ForeignKey('Institution')
+    institution = models.ForeignKey('Institution', related_name='staff')
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
 
 
