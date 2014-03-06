@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 
-from rest_framework.test import APIRequestFactory, APITestCase
+from rest_framework.test import APITestCase
 
 from .factories import UserFactory, ContributorFactory, InstitutionFactory
 
