@@ -26,3 +26,5 @@ mock==1.0.1
 Sphinx==1.2.1
 flake8==2.1.0
 easy-thumbnails==1.4
+djangorestframework==2.3.13
+Markdown==2.4
