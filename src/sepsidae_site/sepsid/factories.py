@@ -15,3 +15,5 @@ class SpeciesFactory(factory.DjangoModelFactory):
     name = 'species_name'
     genus = factory.SubFactory(GenusFactory)
     reference_paper = u"Ozerov, 2005"
+
+    thumbnail = factory.django.ImageField()

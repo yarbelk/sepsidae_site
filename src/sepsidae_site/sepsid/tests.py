@@ -81,6 +81,10 @@ class SpeciesTestCases(APITestCase):
         with self.assertRaises(ValidationError):
             no_early_years= SpeciesFactory.create(discovered_when=1000)
 
+    def test_species_has_image(self):
+        imaged_fly = SpeciesFactory.create()
+        self.assertIsNotNone(imaged_fly.thumbnail)
+
 
 
 class GenusTestCases(APITestCase):

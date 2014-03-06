@@ -15,6 +15,8 @@ class Species(models.Model):
     discovered_who = models.CharField(max_length=100, null=True)
     discovered_when = models.PositiveIntegerField(null=True)
 
+    thumbnail = models.ImageField(upload_to="species/thumbnails/")
+
     def clean(self):
         if not (1000 < self.discovered_when <= date.today().year) and not self.discovered_when == None:
             raise ValidationError("discovered_when Year must be a sane "
