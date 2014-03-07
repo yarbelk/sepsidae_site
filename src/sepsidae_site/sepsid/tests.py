@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from rest_framework.test import APITestCase
 from rest_framework.parsers import JSONParser
 
-from contribs.factories import UserFactory, ContributorFactory, InstitutionFactory
+from contribs.factories import ContributorFactory, InstitutionFactory
 
 from .factories import SpeciesFactory, GenusFactory
 

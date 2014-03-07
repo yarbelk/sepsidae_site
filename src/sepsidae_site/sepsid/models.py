@@ -8,14 +8,22 @@ class Species(models.Model):
 
     contributors = models.ManyToManyField('contribs.Contributor',
                                           related_name="contributions",
+                                          blank=True,
                                           null=True)
 
-    reference_paper = models.CharField(max_length=100)
+    reference_paper = models.CharField(max_length=100,
+                                       blank=True,
+                                       null=True)
 
-    discovered_who = models.CharField(max_length=100, null=True)
-    discovered_when = models.PositiveIntegerField(null=True)
+    discovered_who = models.CharField(max_length=100,
+                                      null=True,
+                                      blank=True)
+    discovered_when = models.PositiveIntegerField(blank=True,
+                                                  null=True)
 
-    thumbnail = models.ImageField(upload_to="species/thumbnails/")
+    thumbnail = models.ImageField(upload_to="species/thumbnails/",
+                                  null=True,
+                                  blank=True)
 
     def clean(self):
         if not (1000 < self.discovered_when <= date.today().year) and not self.discovered_when == None:
@@ -33,6 +41,12 @@ class Species(models.Model):
             genus=self.genus.name
         )
 
+    def __unicode__(self):
+        return self.full_name()
+
 
 class Genus(models.Model):
     name = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return self.name

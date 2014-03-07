@@ -17,15 +17,13 @@ class ContribInstituteTestCases(APITestCase):
 
         self.assertIsNotNone(contributor.institution)
 
-    def test_contributor_has_name_email(self):
+    def test_contributor_has_name(self):
         named_contrib = ContributorFactory.create(
             first_name='Jim',
-            last_name='Bob',
-            email='jim@bob.com'
+            last_name='Bob'
         )
         self.assertEquals(named_contrib.first_name, 'Jim')
         self.assertEquals(named_contrib.last_name, 'Bob')
-        self.assertEquals(named_contrib.email, 'jim@bob.com')
 
 
     def test_institute_has_name_country(self):
