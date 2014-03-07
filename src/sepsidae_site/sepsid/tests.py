@@ -1,7 +1,9 @@
 from __future__ import unicode_literals
 
-from rest_framework.test import APITestCase
+from rest_framework import status
 from rest_framework.parsers import JSONParser
+from rest_framework.reverse import reverse
+from rest_framework.test import APITestCase
 
 from contribs.factories import ContributorFactory, InstitutionFactory
 
@@ -118,3 +120,27 @@ class GenusTestCases(APITestCase):
         self.assertEquals(children.count(), 2)
         self.assertIn(child_one, children)
         self.assertIn(child_two, children)
+
+## Viewset Tests
+
+class SpeciesApiTests(APITestCase):
+    def setUp(self):
+        super(SpeciesApiTests, self).setUp()
+        self.some_wine = GenusFactory.create(name='Wine')
+        self.some_shiraz = SpeciesFactory.create(name='Shiraz', genus=self.some_wine)
+
+    def login(self, user, password=None, oauth=False):
+        return self.client.login(username=user.username, password=password)
+
+    def test_api_has_list_of_species(self):
+        species_uri = reverse('species-list')
+        list_response= self.client.get(species_uri)
+        self.assertEquals(list_response.status_code, status.HTTP_200_OK)
+
+    def test_api_list_of_species_gives_full_name(self):
+        species_uri = reverse('species-list')
+        list_response= self.client.get(species_uri)
+        self.assertEquals(list_response.status_code, status.HTTP_200_OK)
+        self.assertEquals(len(list_response.data), 1)
+        self.assertIn('full_name', list_response.data[0])
+        self.assertEquals(list_response.data[0]['full_name'], 'Wine Shiraz')

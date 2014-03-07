@@ -8,4 +8,3 @@ router.register('contributor', ContributorViewSet)
 router.register('institution', InstitutionViewSet)
 
 urlpatterns = router.urls
-

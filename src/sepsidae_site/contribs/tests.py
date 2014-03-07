@@ -37,9 +37,9 @@ class ContribInstituteTestCases(APITestCase):
 
 ## Viewset Tests
 
-class InstitutionViewsetTest(APITestCase):
+class InstitutionApiTests(APITestCase):
     def setUp(self):
-        super(InstitutionViewsetTest, self).setUp()
+        super(InstitutionApiTests, self).setUp()
         self.institution_with_noone = InstitutionFactory.create()
         self.institution_one = InstitutionFactory.create(name="SUTD")
         self.contrib_one = ContributorFactory.create(institution=self.institution_one)
