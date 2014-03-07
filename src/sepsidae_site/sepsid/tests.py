@@ -118,4 +118,3 @@ class GenusTestCases(APITestCase):
         self.assertEquals(children.count(), 2)
         self.assertIn(child_one, children)
         self.assertIn(child_two, children)
-

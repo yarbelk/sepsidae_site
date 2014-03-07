@@ -5,36 +5,28 @@ from rest_framework.reverse import reverse
 from rest_framework.test import APITestCase
 from rest_framework import status
 
-from .factories import UserFactory, ContributorFactory, InstitutionFactory
+from .factories import ContributorFactory, InstitutionFactory
 
 json_parser = JSONParser()
 
 ### Model tests
 
-class UserTestCases(APITestCase):
-    def test_can_create_user(self):
-        user = UserFactory.create()
-        self.assertIsNotNone(user.id)
-
-    def test_user_has_name_email(self):
-        user = UserFactory.create(
-            first_name='Jim',
-            last_name='Bob',
-            email='jim@bob.com'
-        )
-        self.assertEquals(user.first_name, 'Jim')
-        self.assertEquals(user.last_name, 'Bob')
-        self.assertEquals(user.email, 'jim@bob.com')
-
-    def test_user_has_contributor(self):
-        user = UserFactory.create()
-        contributor = ContributorFactory.create(user=user)
-        self.assertIsNotNone(contributor.id)
-
+class ContribInstituteTestCases(APITestCase):
     def test_contributor_has_institution(self):
         contributor = ContributorFactory.create()
 
         self.assertIsNotNone(contributor.institution)
+
+    def test_contributor_has_name_email(self):
+        named_contrib = ContributorFactory.create(
+            first_name='Jim',
+            last_name='Bob',
+            email='jim@bob.com'
+        )
+        self.assertEquals(named_contrib.first_name, 'Jim')
+        self.assertEquals(named_contrib.last_name, 'Bob')
+        self.assertEquals(named_contrib.email, 'jim@bob.com')
+
 
     def test_institute_has_name_country(self):
         institution = InstitutionFactory.create(
@@ -94,10 +86,8 @@ class ContributorViewsetTest(APITestCase):
         post_fail_response = self.client.post(
             contrib_list_uri,
             data={
-                    "user": {
-                        "first_name": "john",
-                        "last_name": "smith"
-                    },
+                    "first_name": "john",
+                    "last_name": "smith",
                     "institution_uri": {
                         "name": "NUS",
                         "country": "Singapore"}})
@@ -106,10 +96,8 @@ class ContributorViewsetTest(APITestCase):
         patch_fail_response = self.client.patch(
             contrib_detail_uri,
             data={
-                    "user": {
-                        "first_name": "john",
-                        "last_name": "smith"
-                    },
+                    "first_name": "john",
+                    "last_name": "smith",
                     "institution_uri": {
                         "name": "NUS",
                         "country": "Singapore"}})

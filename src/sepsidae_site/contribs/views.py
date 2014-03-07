@@ -6,9 +6,6 @@ from rest_framework import (viewsets, status)
 from .models import Contributor, Institution
 from .serializers import ContributorSerializer, InstitutionSerializer
 
-User = get_user_model()
-
-
 class ContributorViewSet(viewsets.ReadOnlyModelViewSet):
     model = Contributor
     serializer_class = ContributorSerializer
