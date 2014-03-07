@@ -19,7 +19,7 @@ MIDDLEWARE_CLASSES += (
 CACHES = {
     'default': {
         'BACKEND': 'johnny.backends.memcached.MemcachedCache',
-        'LOCATION': 'mediapop.moaich.cfg.apse1.cache.amazonaws.com:11211',
+        'LOCATION': '',
         'KEY_PREFIX': 'sepsidae_site-production',
         'JOHNNY_CACHE': True,
     }

@@ -13,7 +13,7 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('dev', 'dev@mediapop.co'),
+    ('dev', 'wm@localhost.com'),
 )
 MANAGERS = ADMINS
 
@@ -74,7 +74,7 @@ COMPRESS_CSS_HASHING_METHOD = 'content'
 
 SECRET_KEY = r"some random key for security"
 
-ALLOWED_HOSTS = ['.mediapop.co']
+ALLOWED_HOSTS = ['*']
 
 FIXTURE_DIRS = (
     normpath(join(SITE_ROOT, 'fixtures')),
